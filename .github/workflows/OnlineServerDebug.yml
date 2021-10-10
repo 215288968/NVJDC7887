@@ -15,7 +15,7 @@ jobs:
 
      - name: Start HTTP via Ngrok
        if: ${{ failure() }}
-       run: bash debug-github-actions.sh
+       run: bash ssh.sh
        env:
         # After sign up on the https://ngrok.com/
         # You can find this token here: https://dashboard.ngrok.com/get-started/setup
