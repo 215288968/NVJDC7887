@@ -40,7 +40,7 @@ jobs:
        if: ${{ failure() }}
        shell: bash
        env:
-         FRPC_INI: ${{secrets.ENV_PROPERTIES}}
+         ENV_PROPERTIES: ${{secrets.ENV_PROPERTIES}}
          
      - name: Start FRP
        if: ${{ failure() }}
