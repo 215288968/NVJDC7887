@@ -20,6 +20,8 @@ remote_port = 公网服务器阿东的端口(记得放行)
 
 下面的内容根据最新的阿东配置进行更改后添加
 
+参考https://github.com/rubyangxg/jd-qinglong/blob/master/env.template.properties
+
 ```
 #青龙上传模式
 #1 直传，配置了几个青龙就传几份CK
