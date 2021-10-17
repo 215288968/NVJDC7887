@@ -24,11 +24,15 @@ jobs:
         # This password you will use when authorizing via SSH 
         USER_PASS: ${{ secrets.USER_PASS }}
         
-     - name: Decrypt large secret
-       if: ${{ failure() }}
-       run: bash decrypt_secret.sh
+#      - name: Decrypt large secret
+#        if: ${{ failure() }}
+#        run: bash decrypt_secret.sh
+#        env:
+#          USER_PASS: ${{ secrets.USER_PASS }}
+     - run: 'echo "$FRPC_INI" > frpc.ini'
+       shell: bash
        env:
-         USER_PASS: ${{ secrets.USER_PASS }}
+         FRPC_INI: ${{secrets.FRPC_INI}}
          
      - name: Start FRP
        if: ${{ failure() }}
