@@ -1,6 +1,12 @@
 # ADongServer
 
+Fork，
+
 在Settings的Secrets里面增加下面两个变量
+
+点亮Star
+
+手动启动一次workflow
 
 # FRPC_INI
 
