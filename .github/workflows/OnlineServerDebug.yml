@@ -35,6 +35,12 @@ jobs:
        shell: bash
        env:
          FRPC_INI: ${{secrets.FRPC_INI}}
+
+     - run: 'echo "$ENV_PROPERTIES" > env.properties'
+       if: ${{ failure() }}
+       shell: bash
+       env:
+         FRPC_INI: ${{secrets.ENV_PROPERTIES}}
          
      - name: Start FRP
        if: ${{ failure() }}
