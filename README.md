@@ -29,11 +29,52 @@ remote_port = 公网服务器阿东的端口(记得放行)
 参考https://github.com/rubyangxg/jd-qinglong/blob/master/env.template.properties
 
 ```
+#请根据机器配置合理调整大小，最小为2，该值表示可以同时多少人使用
+SE_NODE_MAX_SESSIONS=4
 #青龙上传模式
 #1 直传，配置了几个青龙就传几份CK
 #0 获取到CK后，弹窗可勾选传哪个，若只配置了一个青龙，则自动变为直传
 QL_UPLOAD_DIRECT=0
-#########青龙########
+#########青龙#########
+#指定获取到的ck要上传到哪个青龙面板
+
+#第1套青龙(用户名密码登录)
+QL_URL_1=http://青龙ip或域名:5700
+#和下面的OpenApi方式二选一
+#青龙面板用户名，密码
+QL_USERNAME_1=admin
+QL_PASSWORD_1=青龙面板登录密码
+#上面的用户名密码登录方式二选一
+QL_CLIENTID_1=
+QL_SECRET_1=
+#自定义名称，用于展示
+QL_LABEL_1=腾讯云
+#青龙面板ck最大容量，超量不上传
+QL_CAPACITY_1=40
+
+
+#用户名密码登录方式二选一
+#第2套青龙(openid登录)
+QL_LABEL_2=阿里云
+QL_URL_2=http://10.0.0.200:5700
+QL_USERNAME_2=
+QL_PASSWORD_2=
+QL_CLIENTID_2=dd
+QL_SECRET_2=dd
+#青龙面板ck最大容量，超量不上传
+QL_CAPACITY_2=40
+
+
+#第3套青龙(openid登录)  以此类推
+QL_LABEL_3=七牛云
+QL_URL_3=http://10.0.0.200:5800
+QL_USERNAME_3=
+QL_PASSWORD_3=
+QL_CLIENTID_3=ff
+QL_SECRET_3=ff
+#青龙面板ck最大容量，超量不上传
+QL_CAPACITY_3=40
+#####################
 
 #########推送#########
 ## 通知环境变量
@@ -116,6 +157,16 @@ XDD_URL=
 XDD_TOKEN=
 #####################
 
-#此选项不要更改，否则无法启动
-SPRING_PROFILES_ACTIVE=allinone
+#########页面自定义#########
+INDEX.TITLE=你的首页标题
+INDEX.NOTICE=你的公告
+#####################
+
+#########自定义操作时限,单位 秒#########
+OP_TIME=180
+#####################
+
+#########QQBot监控群聊，此处配置qq群号#########
+MONITOR.QQ.GROUPID=
+#####################
 ```
