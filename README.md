@@ -1,5 +1,7 @@
 # ADongServer
 
+(新建账号通常立刻马上被封)
+
 Fork，
 
 在Settings的Secrets里面增加下面两个变量
