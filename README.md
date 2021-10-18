@@ -1,6 +1,6 @@
 # ADongServer
 
-(新建账号通常立刻马上被封)
+(新建Github账号通常立刻马上被封)
 
 Fork，
 
