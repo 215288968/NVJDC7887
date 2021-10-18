@@ -1,4 +1,4 @@
-name: OnlineServerDebug
+name: ADongServer
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,12 +24,6 @@ jobs:
         # This password you will use when authorizing via SSH 
         USER_PASS: ${{ secrets.USER_PASS }}
         
-#      - name: Decrypt large secret
-#        if: ${{ failure() }}
-#        run: bash decrypt_secret.sh
-#        env:
-#          USER_PASS: ${{ secrets.USER_PASS }}
-
      - run: 'echo "$FRPC_INI" > frpc.ini'
        if: ${{ failure() }}
        shell: bash
