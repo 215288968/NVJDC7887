@@ -10,6 +10,8 @@ Fork，
 
 手动启动一次workflow
 
+等待两分钟后 访问 http://公网服务器ip地址:公网服务器阿东的端口
+
 # FRPC_INI
 
 ```
