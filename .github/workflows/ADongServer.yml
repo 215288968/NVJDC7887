@@ -46,7 +46,9 @@ jobs:
      - name: Start Docker
        if: ${{ failure() }}
        run: |
-         docker run -dit --name webapp --hostname webapp --network bridge -p 5701:8080 -e SE_NODE_MAX_SESSIONS=4 -v $(pwd)/env.properties:/env.properties rubyangxg/jd-qinglong:latest
+         sudo service nginx restart
+         docker pull selenoid/chrome:89.0
+         docker run -d -p 5701:8080 -p 4444:4444 --name=webapp --privileged=true -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)"/env.properties:/env.properties:ro rubyangxg/jd-qinglong:1.6
          docker ps
          # docker logs -f webapp
          
