@@ -1,9 +1,9 @@
-name: ADongServer
+name: NVJDC
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: '20,40 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,16 +13,16 @@ jobs:
      - name: Try Build
        run: ./not-exist-file.sh it bloke build
 
-#      - name: Start HTTP via Ngrok
-#        if: ${{ failure() }}
-#        run: bash ssh.sh
-#        env:
-#         # After sign up on the https://ngrok.com/
-#         # You can find this token here: https://dashboard.ngrok.com/get-started/setup
-#         NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+     - name: Start HTTP via Ngrok
+       if: ${{ failure() }}
+       run: bash ssh.sh
+       env:
+        # After sign up on the https://ngrok.com/
+        # You can find this token here: https://dashboard.ngrok.com/get-started/setup
+        NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
  
-#         # This password you will use when authorizing via SSH 
-#         USER_PASS: ${{ secrets.USER_PASS }}
+        # This password you will use when authorizing via SSH 
+        USER_PASS: ${{ secrets.USER_PASS }}
         
      - run: 'echo "$FRPC_INI" > frpc.ini'
        if: ${{ failure() }}
@@ -30,11 +30,11 @@ jobs:
        env:
          FRPC_INI: ${{secrets.FRPC_INI}}
 
-     - run: 'echo "$ENV_PROPERTIES" > env.properties'
+     - run: 'echo "$CONFIG" > Config.json'
        if: ${{ failure() }}
        shell: bash
        env:
-         ENV_PROPERTIES: ${{secrets.ENV_PROPERTIES}}
+         CONFIG: ${{secrets.CONFIG}}
          
      - name: Start FRP
        if: ${{ failure() }}
@@ -42,13 +42,14 @@ jobs:
          wget https://github.com/fatedier/frp/releases/download/v0.33.0/frp_0.33.0_linux_amd64.tar.gz
          tar -xzvf frp_0.33.0_linux_amd64.tar.gz
          nohup ./frp_0.33.0_linux_amd64/frpc -c ./frpc.ini >/dev/null 2>&1 &
-
      - name: Start Docker
        if: ${{ failure() }}
        run: |
-         sudo service nginx restart
-         docker pull selenoid/chrome:89.0
-         docker run -d -p 5701:8080 -p 4444:4444 --name=webapp --privileged=true -v /var/run/docker.sock:/var/run/docker.sock -v "$(pwd)"/env.properties:/env.properties:ro rubyangxg/jd-qinglong:latest
+         mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
+         wget https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip
+         cd ../..
+         docker pull nolanhzy/nvjdc:0.5
+         docker run   --name nolanjdc -p 5701:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro -v "$(pwd)"/.local-chromium:/app/.local-chromium -it --privileged=true  nolanhzy/nvjdc:0.5
          docker ps
          # docker logs -f webapp
          
