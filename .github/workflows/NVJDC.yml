@@ -3,7 +3,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-    - cron: '20,40 * * * *'
+    - cron: '0,20,40 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
